@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ifip=$(ifconfig | sed -n '19p' | awk '{ print $2 }')
+echo 󱎔 $ifip

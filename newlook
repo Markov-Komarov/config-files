@@ -1,0 +1,6 @@
+#!/bin/sh
+
+wall=$(find /home/markov/Pictures/Wallpapers/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+
+#Set Wallpaper
+feh --bg-fill $wall
