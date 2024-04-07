@@ -1,4 +1,4 @@
 #!/usr/bin/dash -e
-name=$(date | awk '{print $7 $2 $3 $4 $5}')
+name=$(date +"%m-%d-%Y-%H-%M-%S")
 sel=$(slop -f "-i %i -g %g")
 shotgun $sel -> "$HOME/Pictures/Screenshots/$name.png"
