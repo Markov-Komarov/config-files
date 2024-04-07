@@ -1,10 +1,10 @@
 #!/bin/sh
 
-userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
 
+# export PATH=$PATH:/home/maarkov/.local/bin
 # merge in defaults and keymaps
 
 if [ -f $sysresources ]; then
@@ -36,9 +36,14 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-/home/markov/pipewire-init.sh &
-/home/markov/.local/bin/newlook &
-/usr/local/bin/dwmblocks &
-/usr/bin/picom &
+xhost +si:localuser:root &
+xset s off &
+xset s noblank &
+set -dpms &
+/usr/bin/lxpolkit &
+pamixer --set-volume 18 &
+dwmblocks &
+dunst &
+wpp &
+picom &
 exec dwm
