@@ -6,19 +6,11 @@
 #
 
 #
-# Browser
-#
-
-if [[ -z "$BROWSER" && "$OSTYPE" == darwin* ]]; then
-  export BROWSER='mercury-browser-avx2'
-fi
-
-#
 # Editors
 #
 
 if [[ -z "$EDITOR" ]]; then
-  export EDITOR='nvim'
+  export EDITOR='helix'
 fi
 if [[ -z "$VISUAL" ]]; then
   export VISUAL='nvim'
@@ -56,24 +48,7 @@ path=(
   $path
 )
 
-#
-# Less
-#
-
-# Set the default Less options.
-# Mouse-wheel scrolling has been disabled by -X (disable screen clearing).
-# Remove -X to enable it.
-#if [[ -z "$LESS" ]]; then
-#  export LESS='-g -i -M -R -S -w -X -z-4'
+# Try to startx after user login on tty1
+#if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+#  exec Hyprland
 #fi
-
-# Set the Less input preprocessor.
-# Try both `lesspipe` and `lesspipe.sh` as either might exist on a system.
-#if [[ -z "$LESSOPEN" ]] && (( $#commands[(i)lesspipe(|.sh)] )); then
-#  export LESSOPEN="| /usr/bin/env $commands[(i)lesspipe(|.sh)] %s 2>&-"
-#fi
-export QT_QPA_PLATFORMTHEME=qt6ct
-#Try to startx after user login on tty1
-if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-  exec startx
-fi
