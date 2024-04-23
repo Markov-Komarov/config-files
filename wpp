@@ -1,6 +1,14 @@
 #!/bin/dash
 
+killall hyprpaper
 wall=$(find /home/maarkov/Pictures/Wallpapers/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
 
 #Set Wallpaper
-feh --bg-fill $wall
+
+##X.org Session
+#feh --bg-fill $wall
+
+##Wayland Session
+echo "preload = $wall\nwallpaper= DP-3,$wall\nsplash = false" > /home/maarkov/.config/hypr/hyprpaper.conf
+hyprpaper &
+./.local/bin/wb-r
