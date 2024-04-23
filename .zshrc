@@ -1,16 +1,7 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-# Path to powerlevel10k theme
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#Source all plugins
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-# List of plugins used
-plugins=()
+source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # In case a command is not found, try to find the package that has it
 function command_not_found_handler {
@@ -73,15 +64,17 @@ alias pl='$aurhelper -Qs' # list installed package
 alias pa='$aurhelper -Ss' # list availabe package
 alias pc='$aurhelper -Sc' # remove unused cache
 alias po='$aurhelper -Qtdq | $aurhelper -Rns -' # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
-alias vc='code --ozone-platform-hint=wayland --disable-gpu' # gui code editor
-
+alias ado='mpv "https://www.youtube.com/watch?v=13ZBjvLH9NE"'
+alias grep='grep --color=auto'
+alias scrcpy='scrcpy --no-audio --window-title='Anne' --turn-screen-off'
 # Handy change dir shortcuts
-alias ..='cd ..'
-alias ...='cd ../..'
-alias .3='cd ../../..'
-alias .4='cd ../../../..'
-alias .5='cd ../../../../..'
-
+alias cd='z'
+alias ..='z ..'
+alias ...='z ../..'
+alias .3='z ../../..'
+alias .4='z ../../../..'
+alias .5='z ../../../../..'
+alias nvim='helix'
 # Always mkdir a path (this doesn't inhibit functionality to make a single dir)
 alias mkdir='mkdir -p'
 
@@ -100,5 +93,5 @@ setopt INC_APPEND_HISTORY
 
 set -o emacs
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+eval "$(starship init zsh)"
+eval "$(zoxide init zsh)"
