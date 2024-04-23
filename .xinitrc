@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
@@ -36,14 +36,16 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
-xhost +si:localuser:root &
-xset s off &
-xset s noblank &
-set -dpms &
-/usr/bin/lxpolkit &
-pamixer --set-volume 18 &
+#xhost +si:localuser:root &
+#xset s off &
+#xset s noblank &
+#set -dpms &
+
+/usr/bin/polkit-dumb-agent &
+pamixer --set-volume 20 &
 dwmblocks &
 dunst &
-wpp &
-picom &
+newlook &
+udiskie &
+env = QT_QPA_PLATFORMTHEME,qt5ct &
 exec dwm
