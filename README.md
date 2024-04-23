@@ -1,2 +1,2 @@
-## NOT actual dotfiles you can copy and paste and everything will just work.
-# Dont blindly use this since they are my personal own. Modify them for your system :p
+## NOT actual dotfiles that you can copy and paste.
+# Dont blindly use this. Since they are my personal own. Modify them for your system :p
