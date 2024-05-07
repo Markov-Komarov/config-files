@@ -49,6 +49,6 @@ path=(
 )
 
 # Try to startx after user login on tty1
-#if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
-#  exec Hyprland
-#fi
+if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+  exec startx
+fi
