@@ -1,0 +1,124 @@
+theme = "ayu_evolve"
+
+[editor]
+auto-save = true
+auto-format = true
+bufferline = "multiple"
+color-modes = true
+completion-replace = true
+cursorcolumn = false
+cursorline = true
+line-number = "relative"
+mouse = true
+true-color = true
+
+[editor.whitespace.render]
+space = "none"
+nbsp = "none"
+tab = "none"
+newline = "none"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+tab = "→"
+newline = "⏎"
+tabpad = "·" # Tabs will look like "→···" (depending on tab width)
+
+[editor.file-picker]
+hidden = false
+git-ignore = false
+
+[editor.statusline]
+left = [
+  "mode",
+  "spacer",
+  "version-control",
+  "spacer",
+  "separator",
+  "file-name",
+  "file-modification-indicator"
+]
+right = [
+  "spinner",
+  "spacer",
+  "workspace-diagnostics",
+  "separator",
+  "spacer",
+  "diagnostics",
+  "position",
+  "file-encoding",
+  "file-line-ending",
+  "file-type"
+]
+separator = "╎"
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-messages = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "bar"
+
+[editor.indent-guides]
+render = true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "╎"
+skip-levels = 0
+
+[editor.soft-wrap]
+enable = true
+max-wrap = 10 # increase value to reduce forced mid-word wrapping
+max-indent-retain = 40
+
+#[keys.normal]
+# esc is remapped to capslock locally
+#esc = ["collapse_selection", "keep_primary_selection", ":w"]
+#C-v = "vsplit"
+#C-h = "jump_view_left"
+#C-j = "jump_view_down"
+#C-k = "jump_view_up"
+#C-l = "jump_view_right"
+#"C-," = "goto_previous_buffer"
+#"C-." = "goto_next_buffer"
+#"K" = "insert_newline"
+# Move line up/down using A-k, A-j
+#"A-k" = [
+#  "extend_to_line_bounds",
+#  "delete_selection",
+#  "move_line_up",
+#  "paste_before"
+#]
+#"A-j" = [
+#  "extend_to_line_bounds",
+#  "delete_selection",
+#  "move_line_down",
+#  "paste_before"
+#]
+
+#[keys.normal.g]
+#q = ":bc"
+#Q = ":bc!"
+
+# Remove vscode "training wheels"
+# Comment this to enable arrow navigation in insert mode
+#[keys.insert]
+#j = { k = "normal_mode" }
+#up = "no_op"
+#down = "no_op"
+#left = "no_op"
+#right = "no_op"
+#pageup = "no_op"
+#pagedown = "no_op"
+#home = "no_op"
+#end = "no_op"
+# VSCode-like auto-completeion (pretty much all IDEs do it on C-space)
+#"C-space" = "completion"
+
+# Config Mode
+#[keys.normal."C-backspace"]
+#r = [":config-reload", ":reload-all"]
+#o = ":config-open"
+# l = ":o ~/.config/helix/languages.toml"
