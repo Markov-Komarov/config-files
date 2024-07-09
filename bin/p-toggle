@@ -1,0 +1,9 @@
+#!/usr/bin/sh
+
+if (($(ps -aux | grep [p]icom | wc -l) > 0))
+then
+  pkill -9 picom
+else
+  picom -b --config=/home/maarkov/.config/picom/picom.conf &
+fi
+

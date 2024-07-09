@@ -1,0 +1,4 @@
+#!/bin/dash -e
+
+wall=$(find /home/maarkov/Pictures/Wallpapers/ -type f -name "*.jpg" -o -name "*.png" | shuf -n 1)
+feh --bg-fill $wall

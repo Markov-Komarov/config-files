@@ -1,0 +1,4 @@
+#!/usr/bin/dash -e
+name=$(date +"%m-%d-%Y-%H-%M-%S")
+sel=$(hacksaw -f "-i %i -g %g")
+shotgun $sel -> "$HOME/Pictures/Screenshots/$name.png"

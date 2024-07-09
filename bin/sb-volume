@@ -1,0 +1,33 @@
+#!/bin/sh
+
+case $BLOCK_BUTTON in
+	1)st -c "st-fl" -g 90x15 -e pulsemixer; pkill -RTMIN+10 "${STATUSBAR:-dwmblocks}" ;;
+	2) wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle ;;
+	4) wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ ;;
+	5) wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- ;;
+esac
+
+vol="$(wpctl get-volume @DEFAULT_AUDIO_SINK@)"
+
+# If muted, print 󰝟 and exit.
+[ "$vol" != "${vol%\[MUTED\]}" ] && echo "[󰝟 00%]" && exit
+
+vol="${vol#Volume: }"
+
+split() {
+	# For ommiting the . without calling and external program.
+	IFS=$2
+	set -- $1
+	printf '%s' "$@"
+}
+
+vol="$(printf "%.0f" "$(split "$vol" ".")")"
+
+case 1 in
+	$((vol >= 50)) ) icon="󰕾" ;;
+	$((vol >= 20)) ) icon="󰖀" ;;
+	$((vol >= 0)) ) icon="󰕿" ;;
+	* ) echo "[$icon $vol%]" && exit ;;
+esac
+
+echo "[$icon $vol%]"

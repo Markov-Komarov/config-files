@@ -1,0 +1,4 @@
+#!/bin/dash
+
+ifip=$(ip addr | sed -n '10p' | awk '{ print $2 }')
+echo "[󰌷 $ifip]"

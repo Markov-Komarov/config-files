@@ -1,0 +1,10 @@
+#!/bin/sh
+
+
+case $BLOCK_BUTTON in
+	1) feh-bgp ;;
+	2) st -c "st-fl" -g 90x25 ;;
+	3) p-toggle ;;
+esac
+
+echo "[マルコフ]"
