@@ -1,0 +1,3 @@
+#!/bin/sh
+
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- ; kill -37 $(pidof dwmblocks)
