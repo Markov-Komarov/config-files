@@ -1,4 +1,4 @@
-#!/bin/dash -e
+#!/bin/sh -e
 
 if pgrep -x "picom" > /dev/null
 then

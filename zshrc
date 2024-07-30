@@ -66,7 +66,7 @@ alias pa='$aurhelper -Ss' # list availabe package
 alias pc='$aurhelper -Sc' # remove unused cache
 alias po='$aurhelper -Qtdq | $aurhelper -Rns -' # remove unused packages, also try > 
 alias po2='$aurhelper -Qqd | $aurhelper -Rsu --print -'
-alias ado='mpv "https://www.youtube.com/watch?v=13ZBjvLH9NE"'
+alias ado='mpv --loop "https://www.youtube.com/watch?v=13ZBjvLH9NE"'
 alias grep='grep --color=auto'
 alias scrcpy='scrcpy --no-audio --window-title='Anne' --turn-screen-off'
 # Handy change dir shortcuts

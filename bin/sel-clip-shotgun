@@ -1,4 +1,4 @@
-#!/usr/bin/dash -e
+#!/bin/sh -e
 
 sel=$(hacksaw -f "-i %i -g %g")
 name=$(date +"%m-%d-%Y-%H-%M-%S")

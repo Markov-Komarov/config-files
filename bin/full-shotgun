@@ -1,3 +1,3 @@
-#!/usr/bin/dash -e
+#!/bin/sh -e
 name=$(date +"%m-%d-%Y-%H-%M-%S")
 shotgun -> "$HOME/Pictures/Screenshots/$name.png"
