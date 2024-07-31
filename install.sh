@@ -65,13 +65,13 @@ clone_mkdwm() {
     cd $SRCDIR/mk-dwm || { echo "Failed to change directory to mk-dwm"; return 1; }
 
     # Build the project
-    if ! make clean; then
+    if ! make -s clean; then
         echo "Make cleanup failed"
         return 1
     fi
 
     # Install the built binary
-    if ! sudo make clean install; then
+    if ! sudo make -s clean install; then
         echo "Failed to install the built binary"
         return 1
     fi
@@ -93,13 +93,13 @@ clone_mkblocks() {
     cd $SRCDIR/mk-blocks || { echo "Failed to change directory to mk-blocks"; return 1; }
 
     # Build the project
-    if ! make clean; then
+    if ! make -s clean; then
         echo "Make cleanup failed"
         return 1
     fi
 
     # Install the built binary
-    if ! sudo make clean install; then
+    if ! sudo make -s clean install; then
         echo "Failed to install the built binary"
         return 1
     fi
@@ -121,13 +121,13 @@ clone_mkterm() {
     cd $SRCDIR/mk-st || { echo "Failed to change directory to st"; return 1; }
 
     # Build the project
-    if ! make clean; then
+    if ! make -s clean; then
         echo "Make cleanup failed"
         return 1
     fi
 
     # Install the built binary
-    if ! sudo make clean install; then
+    if ! sudo make -s clean install; then
         echo "Failed to install the built binary"
         return 1
     fi
@@ -149,13 +149,13 @@ clone_mkmenu() {
     cd $SRCDIR/mk-dmenu || { echo "Failed to change directory to dmenu"; return 1; }
 
     # Build the project
-    if ! make clean; then
+    if ! make -s clean; then
         echo "Make cleanup failed"
         return 1
     fi
 
     # Install the built binary
-    if ! sudo make clean install; then
+    if ! sudo make -s clean install; then
         echo "Failed to install the built binary"
         return 1
     fi
@@ -165,18 +165,17 @@ clone_mkmenu() {
 
 clone_shbin_files() {
     # Clone the directory to ~/local/
-    if ! cp -r bin $SHDIR; then
-        echo "Cloned bin files to $SHDIR failed"
+    if ! cp -r bin $HOME/.local; then
+        echo "Cloned bin files to .local/bin failed"
         return 1
     else
-        echo "Cloned bin files to $SHDIR"
+        echo "Cloned bin files to .local/bin"
     fi
 }
 
 clone_config_folders() {
     # Ensure the target directory exists
-    [ ! -d ~/.config ] && mkdir -p ~/.config
-
+    [ ! -d $HOME/.config ] && mkdir -p $HOME/.config
     # Iterate over all directories in config/*
     for dir in config/*/; do
         # Extract the directory name
@@ -184,7 +183,7 @@ clone_config_folders() {
 
         # Clone the directory to ~/.config/
         if [ -d "$dir" ]; then
-            cp -r "$dir" ~/.config/
+            cp -r "$dir" $HOME/.config
             echo "Cloned $dir_name to ~/.config/"
         else
             echo "Directory $dir_name does not exist, skipping"
