@@ -1,8 +1,6 @@
 #!/bin/sh
 
-SRCDIR="~/src"
-SHDIR="~/.local"
-
+SRCDIR="$HOME/src"
 # Ensure the target directory exists
 if [ ! -d "$SRCDIR" ]; then
 # Create the directory if it does not exist
@@ -10,15 +8,6 @@ if [ ! -d "$SRCDIR" ]; then
   echo "Directory '$SRCDIR' created."
 else
   echo "Directory '$SRCDIR' already exists."
-fi
-
-# Ensure the target directory exists
-if [ ! -d "$SHDIR" ]; then
-# Create the directory if it does not exist
-  mkdir -p "$SHDIR"
-  echo "Directory '$SHDIR' created."
-else
-  echo "Directory '$SHDIR' already exists."
 fi
 
 # Function to install dependencies for Debian-based distributions
@@ -34,20 +23,20 @@ fi
 #}
 install_arch() {
   sudo pacman -Syu --noconfirm
-  sudo pacman -S --noconfirm --needed base-devel libx11 libxinerama libxft imlib2 git dash shotgun hacksaw picom feh helix fastfetch alacritty mpv pulsemixer xorg-server xorg-xinit zoxide eza starship
+  sudo pacman -S --noconfirm --needed base-devel libx11 libxinerama libxft imlib2 git dash shotgun hacksaw picom feh helix fastfetch alacritty mpv pulsemixer xorg-server xorg-xinit zoxide eza starship pcmanfm-gtk3
 }
 
 if [ -f /etc/os-release ]; then
     . /etc/os-release
     case "$ID" in
-        debian|ubuntu)
-            echo "Detected Debian-based distribution"
-            install_debian
-            ;;
-        rhel|centos|fedora)
-            echo "Detected Red Hat-based distribution"
-            install_redhat
-            ;;
+#        debian|ubuntu)
+#            echo "Detected Debian-based distribution"
+#            install_debian
+#            ;;
+#        rhel|centos|fedora)
+#            echo "Detected Red Hat-based distribution"
+#            install_redhat
+#            ;;
         arch|cachyos)
             echo "Detected Arch-based distribution"
             install_arch
@@ -64,8 +53,8 @@ fi
 
 clone_mkdwm() {
     # Clone the repository in the home/src directory
-    if [ ! -d ~/src/mk-dwm ]; then
-        if ! git clone https://github.com/Markov-Komarov/mk-dwm.git ~/src/mk-dwm; then
+    if [ ! -d $SRCDIR/mk-dwm ]; then
+        if ! git clone https://github.com/Markov-Komarov/mk-dwm.git $SRCDIR/mk-dwm; then
             echo "Failed to clone the repository"
             return 1
         fi
@@ -73,7 +62,7 @@ clone_mkdwm() {
         echo "Repository already exists, skipping clone"
     fi
 
-    cd ~/src/mk-dwm || { echo "Failed to change directory to mk-dwm"; return 1; }
+    cd $SRCDIR/mk-dwm || { echo "Failed to change directory to mk-dwm"; return 1; }
 
     # Build the project
     if ! make clean; then
@@ -92,8 +81,8 @@ clone_mkdwm() {
 
 clone_mkblocks() {
     # Clone the repository in the home/src directory
-    if [ ! -d ~/src/mk-blocks ]; then
-        if ! git clone https://github.com/Markov-Komarov/mk-blocks.git ~/src/mk-blocks; then
+    if [ ! -d $SRCDIR/mk-blocks ]; then
+        if ! git clone https://github.com/Markov-Komarov/mk-blocks.git $SRCDIR/mk-blocks; then
             echo "Failed to clone the repository"
             return 1
         fi
@@ -101,7 +90,7 @@ clone_mkblocks() {
         echo "Repository already exists, skipping clone"
     fi
 
-    cd ~/src/mk-blocks || { echo "Failed to change directory to mk-blocks"; return 1; }
+    cd $SRCDIR/mk-blocks || { echo "Failed to change directory to mk-blocks"; return 1; }
 
     # Build the project
     if ! make clean; then
@@ -120,8 +109,8 @@ clone_mkblocks() {
 
 clone_mkterm() {
     # Clone the repository in the home/src directory
-    if [ ! -d ~/src/mk-st ]; then
-        if ! git clone https://github.com/Markov-Komarov/mk-st.git ~/src/mk-st; then
+    if [ ! -d $SRCDIR/mk-st ]; then
+        if ! git clone https://github.com/Markov-Komarov/mk-st.git $SRCDIR/mk-st; then
             echo "Failed to clone the repository"
             return 1
         fi
@@ -129,7 +118,7 @@ clone_mkterm() {
         echo "Repository already exists, skipping clone"
     fi
 
-    cd ~/src/mk-st || { echo "Failed to change directory to st"; return 1; }
+    cd $SRCDIR/mk-st || { echo "Failed to change directory to st"; return 1; }
 
     # Build the project
     if ! make clean; then
@@ -148,8 +137,8 @@ clone_mkterm() {
 
 clone_mkmenu() {
     # Clone the repository in the home/src directory
-    if [ ! -d ~/src/mk-dmenu ]; then
-        if ! git clone https://github.com/Markov-Komarov/mk-dmenu.git ~/src/mk-dmenu; then
+    if [ ! -d $SRCDIR/mk-dmenu ]; then
+        if ! git clone https://github.com/Markov-Komarov/mk-dmenu.git $SRCDIR/mk-dmenu; then
             echo "Failed to clone the repository"
             return 1
         fi
@@ -157,7 +146,7 @@ clone_mkmenu() {
         echo "Repository already exists, skipping clone"
     fi
 
-    cd ~/src/mk-dmenu || { echo "Failed to change directory to dmenu"; return 1; }
+    cd $SRCDIR/mk-dmenu || { echo "Failed to change directory to dmenu"; return 1; }
 
     # Build the project
     if ! make clean; then
@@ -171,18 +160,17 @@ clone_mkmenu() {
         return 1
     fi
 
-    echo "mk-st installed successfully"
+    echo "mk-dmenu installed successfully"
 }
 
 clone_shbin_files() {
-    # Clone the directory to ~/.config/
-    if ! cp -r bin $SHDIR
+    # Clone the directory to ~/local/
+    if ! cp -r bin $SHDIR; then
         echo "Cloned bin files to $SHDIR failed"
+        return 1
     else
         echo "Cloned bin files to $SHDIR"
     fi
-    cd
-done
 }
 
 clone_config_folders() {
@@ -209,6 +197,7 @@ clone_mkdwm
 clone_mkblocks
 clone_mkterm
 clone_mkmenu
+clone_shbin_files
 clone_config_folders
 
 echo "All dependencies installed successfully."
